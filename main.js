@@ -1,8 +1,10 @@
-function getData(cb) {
+const baseURL = "https://ci-swapi.herokuapp.com/api/";
+
+function getData(type, cb) {
     var xhr = new XMLHttpRequest(); 
 // Creates a new instance of the XMLHttpRequest object. 
 
-xhr.open("GET", "https://ci-swapi.herokuapp.com/api/");
+xhr.open("GET", baseURL + type + "/");
 // xhr.open() method. GET value is used whe retrieving data from the server. Post is used when sending data to the server.
 // Second arguement is the data that we went to recieve.
 xhr.send();
@@ -19,11 +21,11 @@ xhr.onreadystatechange = function() {
 // cb stands for 'callback'
 };
 
-function printDataToConsole(data) {
-    console.log(data);
+function writeToDocument (type) {
+    getData(type, function(data){
+        document.getElementById("data").innerHTML = data;
+    })
 }
-
-getData(printDataToConsole);
 
 
 
